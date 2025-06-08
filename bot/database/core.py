@@ -33,6 +33,10 @@ class Database:
         CREATE TABLE IF NOT EXISTS banned_users(
             user_id INTEGER PRIMARY KEY
         );
+
+        CREATE TABLE IF NOT EXISTS administrators(
+            user_id INTEGER PRIMARY KEY
+        );
         """
         )
 
