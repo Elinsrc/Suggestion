@@ -23,6 +23,7 @@
     "cmd_me_description": "Shows whether you are a Bot Admin or not.",
     "cmd_ban_user_description": "Allows to ban users by ID so they cannot use the Bot.",
     "cmd_unban_user_description": "Allows to unblock a user by ID so that they can use the bot again.",
+    "cmd_private_not_allowed": "This command cannot be used in a private chat. If you need any help, please use the <code>/help</code> command.",
     "you_not_admin": "You not Admin! ❌",
     "you_admin": "You are Admin! ✔️",
     "sql_error": "SQL executed with an error: {classname): {error}",
