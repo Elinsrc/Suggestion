@@ -7,6 +7,7 @@ from sqlite3 import IntegrityError, OperationalError
 
 from bot.utils import commands
 from bot.utils.localization import Strings, use_chat_lang
+from bot.database import database
 from bot.database.administrators import (
     user_add_to_admin,
     user_remove_from_admin,
@@ -18,6 +19,8 @@ from bot.database.global_ban import (
     is_user_banned,
     check_ban,
 )
+
+conn = database.get_conn()
 
 async def get_admin_id(user_id):
     if user_id == SUPER_ADMIN:
