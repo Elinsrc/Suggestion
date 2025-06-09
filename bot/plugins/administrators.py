@@ -3,6 +3,7 @@ from hydrogram import Client, filters
 from hydrogram.types import Message
 
 from config import SUPER_ADMIN, DATABASE_PATH
+from sqlite3 import IntegrityError, OperationalError
 
 from bot.utils import commands
 from bot.utils.localization import Strings, use_chat_lang
@@ -208,9 +209,6 @@ async def global_unban_user(c: Client, m: Message, s: Strings):
     if caller_id == SUPER_ADMIN:
         pass
     else:
-        if not await is_user_admin(caller_id):
-            return await m.reply(s("you_not_admin"))
-
         if target_user_id == SUPER_ADMIN:
             return
 

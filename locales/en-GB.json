@@ -40,6 +40,5 @@
     "you_cannot_ban_self": "You cannot ban yourself!",
     "you_cannot_ban_superadmin": "You cannot ban the Superadmin!",
     "you_cannot_ban_admin": "You cannot ban another Admin!",
-    "you_cannot_unban_superadmin": "You cannot unban the Superadmin!",
     "you_cannot_unban_admin": "You cannot unban an Admin!"
 }
