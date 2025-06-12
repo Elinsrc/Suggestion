@@ -16,8 +16,6 @@
     "cmds_list_select_category": "Пожалуйста, выберите категорию, чтобы увидеть доступные команды.",
     "cmds_list_category_title": "Команды в категории <b>{category}</b>:",
     "suggestpost_example": "<b>Пример</b>: /suggestpost или /sp [файл и текст (необязательно)]",
-    "suggestpost_info": "От пользователя: {user_name} (ID: {user_id})",
-    "suggestpost_text": "\nТекст: {text}",
     "cmd_suggestpost_description": "Отправляет ваш медия файл для расмотрения и публикации в <a href=\"https://t.me/HalfLifeCollective\">Half-Life Collective</a>",
     "cmd_ping_description": "Показывает задержку Бота для отправки сообщения.",
     "cmd_me_description": "Показывает, являетесь ли вы администратором Бота или нет.",

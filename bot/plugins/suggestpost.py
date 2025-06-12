@@ -36,9 +36,9 @@ async def sendmedia(c: Client, m: Message, s: Strings):
         await m.reply_text(s("suggestpost_example"))
         return
 
-    caption_text = s("suggestpost_info").format(user_name=user_name, user_id=user_id)
+    caption_text = f"👤 {user_name} (ID: {user_id})"
     if text:
-        caption_text += s("suggestpost_text").format(text=text)
+        caption_text += f"\n💬 {text}"
 
     media_types = {
         'audio': c.send_audio,
