@@ -9,16 +9,12 @@ from hydrogram.types import (
 from bot.utils import commands
 from bot.utils.localization import Strings, use_chat_lang
 
-from bot.database.global_ban import check_ban
-
-
 from hydrogram.enums import ParseMode
 
 # Using a low priority group so deeplinks will run before this and stop the propagation.
 @Client.on_message(filters.command("start") & filters.private, group=2)
 @Client.on_callback_query(filters.regex("^start_back$"))
 @use_chat_lang
-@check_ban
 async def start_pvt(c: Client, m: Message | CallbackQuery, s: Strings):
     if isinstance(m, CallbackQuery):
         msg = m.message
@@ -42,7 +38,6 @@ async def start_pvt(c: Client, m: Message | CallbackQuery, s: Strings):
 
 @Client.on_message(filters.command("start") & filters.group, group=2)
 @use_chat_lang
-@check_ban
 async def start_grp(c: Client, m: Message | CallbackQuery, s: Strings):
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[

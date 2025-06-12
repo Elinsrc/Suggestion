@@ -16,13 +16,3 @@ async def user_remove_from_ban(user_id: int):
 async def is_user_banned(user_id: int) -> bool:
     async with conn.execute('SELECT user_id FROM banned_users WHERE user_id = ?', (user_id,)) as cursor:
         return await cursor.fetchone() is not None
-
-def check_ban(func):
-    async def wrapper(client, message, *args, **kwargs):
-        if message.from_user:
-            # Ignore banned user
-            if await is_user_banned(message.from_user.id):
-                return
-        return await func(client, message, *args, **kwargs)
-
-    return wrapper

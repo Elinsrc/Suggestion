@@ -4,15 +4,21 @@ import asyncio
 from functools import partial, wraps
 from typing import TYPE_CHECKING
 
+import hydrogram
 from hydrogram import Client, StopPropagation
 from hydrogram.enums import ChatType
 from hydrogram.types import CallbackQuery, ChatPrivileges, Message
+from hydrogram.methods import Decorators
+from hydrogram.filters import Filter
 
 from bot.utils.localization import (
     get_lang,
     get_locale_string,
 )
 from bot.utils.utils import check_perms
+
+
+from bot.database.global_ban import is_user_banned
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -97,3 +103,42 @@ def stop_here(func: Callable) -> Callable:
             raise StopPropagation
 
     return wrapper
+
+
+def command(
+    self: hydrogram.Client | Filter | None = None,
+    filters: Filter | None = None,
+    group: int = 0,
+    check_ban: bool | None = None,
+):
+    def decorator(func):
+        async def wrapped(client, message, *args, **kwargs):
+            if check_ban:
+                lang = await get_lang(message)
+                s = partial(
+                    get_locale_string,
+                    lang,
+                )
+
+                if message.from_user:
+                    if await is_user_banned(message.from_user.id):
+                        return await message.reply_text(s("banned_msg"))
+
+            return await func(client, message, *args, **kwargs)
+
+        if isinstance(self, hydrogram.Client):
+            self.add_handler(hydrogram.handlers.MessageHandler(wrapped, filters), group)
+        elif isinstance(self, Filter) or self is None:
+            if not hasattr(func, "handlers"):
+                func.handlers = []
+
+            func.handlers.append((
+                hydrogram.handlers.MessageHandler(wrapped, self),
+                group if filters is None else filters,
+            ))
+
+        return func
+
+    return decorator
+
+Decorators.on_cmd = command

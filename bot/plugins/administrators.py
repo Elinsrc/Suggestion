@@ -17,7 +17,6 @@ from bot.database.global_ban import (
     user_add_to_ban,
     user_remove_from_ban,
     is_user_banned,
-    check_ban,
 )
 
 conn = database.get_conn()
@@ -32,7 +31,6 @@ async def get_admin_id(user_id):
 
 @Client.on_message(filters.command("me"))
 @use_chat_lang
-@check_ban
 async def sudos(c: Client, m: Message , s: Strings):
     admin = await get_admin_id(m.from_user.id)
 
@@ -137,7 +135,6 @@ async def del_admin(c: Client, m: Message, s: Strings):
 
 @Client.on_message(filters.command("ban_user"))
 @use_chat_lang
-@check_ban
 async def global_ban_user(c: Client, m: Message, s: Strings):
     caller_id = m.from_user.id
     admin = await get_admin_id(caller_id)
@@ -186,7 +183,6 @@ async def global_ban_user(c: Client, m: Message, s: Strings):
 
 @Client.on_message(filters.command("unban_user"))
 @use_chat_lang
-@check_ban
 async def global_unban_user(c: Client, m: Message, s: Strings):
     caller_id = m.from_user.id
     admin = await get_admin_id(caller_id)

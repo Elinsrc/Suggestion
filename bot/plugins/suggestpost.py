@@ -5,12 +5,10 @@ from hydrogram.types import Message
 from config import FORWARDING_CHAT
 
 from bot.utils.localization import Strings, use_chat_lang
-from bot.database.global_ban import check_ban
 from bot.utils import commands
 
-@Client.on_message(filters.command(["suggestpost","sp"]))
+@Client.on_cmd(filters.command(["suggestpost","sp"]), check_ban = True)
 @use_chat_lang
-@check_ban
 async def sendmedia(c: Client, m: Message, s: Strings):
     user = m.from_user
     user_name = user.username or user.first_name

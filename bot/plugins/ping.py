@@ -5,10 +5,7 @@ from hydrogram.types import Message
 
 from bot.utils import commands
 
-from bot.database.global_ban import check_ban
-
 @Client.on_message(filters.command("ping"))
-@check_ban
 async def ping(c: Client, m: Message):
     first = datetime.now()
     sent = await m.reply_text("<b>Pong!</b>")
